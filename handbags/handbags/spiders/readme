@@ -1,0 +1,31 @@
+runnign step 
+
+python page1_brandname.py
+	# u will get brand_name, its position, its number of collection, its brands links
+	# information will saved in 
+	# page1_bn_bl_bc_new.csv (contains brand_name, brand_count, brand_page_link,  brand_position)
+	# page1_brandname ( contains  brands name)
+
+python page1_scroll2.py
+	#it will scroll the first home page for bag ie page 1
+	# it save page body in pag1_body.html
+
+
+#python page1_collection_link.py
+	# it collect brand  from page1_brandname
+	# it collect page body from pag1_body.html
+	# it insert data into data base
+	#sql = """insert into position_brand_itemname_itemlinks (date, position, brand, item_name,  item_link) values ("%s", "%s", "%s", "%s", "%s")"""%(value)
+
+
+
+scrapy runspider page2_baginfo.py
+	# it run python page1_collection_link.py
+	# collect links from page1_collection_link.py
+	# save item info in file page2_hand_bag_info ( contens item_title,  item_colour, item_discount, item_price, item_seller)
+
+
+python page2_into_databases.py
+	# save iem info into data base
+	# sql = """insert into table bag_info (item_title, colour, image_links, discount, price, seller_name ) values ("%s", "%s", "%s", "%s", "%s", "%s")"""%(value)
+

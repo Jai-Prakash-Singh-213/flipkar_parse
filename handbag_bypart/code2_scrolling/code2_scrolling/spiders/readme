@@ -1,0 +1,34 @@
+page1_brandinfo.py 
+	# open  link = "http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?sid=reh%2Cihu%2Cm08"
+	# collect brand_link , brand_name , brand_count
+	# open file  page1_bn_bl_bc.csv ( brandname, brandlink, brandcount)
+        # open file page1_brandname_brandlink (brandname, brandlink)
+	# open table handbagbrands_info
+	# insert into handbagbrands_info(date, position, brand_name, brand_count, brand_link)
+
+
+directory:
+	# handbag_bypart/code2_scrolling/code2_scrolling/spiders# 
+
+#page1_scroll.py
+	# scroll page
+        # open file page1_link_crawling
+	# enter crawling link to page1_link_crawling
+	# save links accordin to brands name file 
+        # open file page1_link_crawled
+	# save links crowled
+
+pythomn thread_on_scrolling.py
+	# open file "path to page1_brandname_brandlink" will change after
+        # collect brandname and brand links and pass it to subprocess  under 
+	# scrapy crawl page1_scroll -a brand_and_url="Butterflies,http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?p%5B0%5D=facets.brand%255B%255D%3DButterflies&sid=reh%2Cihu%2Cm08"
+        # open file page1_link_crawling
+	# extract links from page1_link_crawling
+        # open file page1_link_crawled
+        # extract links from  page1_link_crawled
+        # avail _links = set(page1_link_crawling)  - set(page1_link_crawled)
+	# open file  page1_avail_link"
+	# save balanace links
+	# repeate  again with new file page1_avail_link
+        # if no balanace return from main 
+	

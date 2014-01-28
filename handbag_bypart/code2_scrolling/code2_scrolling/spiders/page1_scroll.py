@@ -57,8 +57,12 @@ class DmozSpider(BaseSpider):
    
     def parse(self, response):   
         driver = self.driver
-        brand = self.brand 
-        print response.url
+        brand = self.brand
+        
+        f = open("page1_link_crawling", "a+") 
+        print >>f, ','.join([brand,str(response.url).strip()])
+	f.close()
+
         driver.get(str(response.url))
         
 
@@ -94,7 +98,7 @@ class DmozSpider(BaseSpider):
 
         tag_a = soup.find_all("a", attrs={"class":"fk-display-block"})
 
-        filename = brand+".html"
+        filename = brand+"333333.html"
 	
         f = open(filename, "a+")
 
@@ -104,6 +108,9 @@ class DmozSpider(BaseSpider):
             print >>f, link
 
         f.close()
+        
+	f = open("page1_link_crawled", "a+")
+	print >>f, ','.join([brand,str(response.url).strip()])
+        f.close()
 
-
-        return page
+        return 0

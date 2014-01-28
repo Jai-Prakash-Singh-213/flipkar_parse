@@ -98,7 +98,7 @@ class DmozSpider(BaseSpider):
 
         tag_a = soup.find_all("a", attrs={"class":"fk-display-block"})
 
-        filename = brand+"333333.html"
+        filename = brand+".html"
 	
         f = open(filename, "a+")
 

@@ -1,0 +1,45 @@
+page1_brandinfo.py 
+	# open  link = "http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?sid=reh%2Cihu%2Cm08"
+	# collect brand_link , brand_name , brand_count
+	# open file  page1_bn_bl_bc.csv ( brandname, brandlink, brandcount)
+        # open file page1_brandname_brandlink (brandname, brandlink)
+	# open table handbagbrands_info
+	# insert into handbagbrands_info(date, position, brand_name, brand_count, brand_link)
+
+
+directory:
+	# handbag_bypart/code2_scrolling/code2_scrolling/spiders# 
+
+#page1_scroll.py
+	# scroll page
+        # open file page1_link_crawling
+	# enter crawling link to page1_link_crawling
+	# save links accordin to brands name file 
+        # open file page1_link_crawled
+	# save links crowled
+
+pythomn thread_on_scrolling.py
+	# open file "path to page1_brandname_brandlink"
+        # collect brandname and brand links and pass it to subprocess  under 
+	# scrapy crawl page1_scroll -a brand_and_url="Butterflies,http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?p%5B0%5D=facets.brand%255B%255D%3DButterflies&sid=reh%2Cihu%2Cm08"
+
+
+#scrapy crawl collect_link_and_extract -a filepath="/home/desktop/flipkart/handbag_bypart/code2_scrolling/code2_scrolling/spiders/Justclik.html"
+	# take file path from argument 
+	# extract its brandname
+	# extract  linke from file using cat funda and cubporcess
+	# put list of extracted link to start_urls
+	# open url 
+	# open file brandname.csv
+	# enter where link = responce link 
+	# ','.join([date, item_title, item_price, item_image, item_clour, item_discount, item_seller, link])
+
+python thread_for_code1.py
+	# take path as argument 
+	# put ot main 
+	# txtract all html file from path 
+	# using glob funda
+	# pass filepath+filename to worker function 
+	# operate 10 thread on it 
+
+

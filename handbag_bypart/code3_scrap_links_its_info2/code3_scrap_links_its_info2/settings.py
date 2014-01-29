@@ -16,6 +16,10 @@ NEWSPIDER_MODULE = 'code3_scrap_links_its_info2.spiders'
 
 
 
+TELNETCONSOLE_HOST = '127.0.0.1' # defaults to 0.0.0.0 set so
+TELNETCONSOLE_PORT = '6073'      # only we can see it.
+TELNETCONSOLE_ENABLED = False
+
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
     'code3_scrap_links_its_info2.proxymiddle.ProxyMiddleware': 100,

@@ -4,8 +4,9 @@ from threading import Thread
 import time
 import os
 import glob
+import time
 
-num_fetch_threads = 60
+num_fetch_threads = 100
 enclosure_queue = Queue()
 
 
@@ -21,6 +22,15 @@ def worker(i,q):
 
 
 def main(filepath):
+
+    f = glob.glob(filepath+'/*.html')
+
+    val = len(f)/4
+
+    val1 = val*1
+    val2 = val*2
+
+    f = f[val1:val2]
     
 
     for i in range(num_fetch_threads):
@@ -28,22 +38,17 @@ def main(filepath):
         t.setDaemon(True)
         t.start()
     
-    f = glob.glob(filepath+'/*.html') 
-    
-    val = len(f)/4
-    
-    val1 = val*1
-    val2 = val*2
-
-    f = f[val1:val2]
 
     for filepth in f:
         enclosure_queue.put(filepth)
 
     print '*** Main thread waiting ***'
+    startime = time.strftime("%I:%M:%S")
     enclosure_queue.join()
+    finishedtime =  time.strftime("%I:%M:%S")
     print '*** Done ***'
-    
+    print startime, ":", finishedtime
+
 
     return 0
 

@@ -5,7 +5,7 @@ import time
 import os
 import glob
 
-num_fetch_threads = 100
+num_fetch_threads = 60
 enclosure_queue = Queue()
 
 
@@ -29,14 +29,13 @@ def main(filepath):
         t.start()
     
     f = glob.glob(filepath+'/*.html') 
-
+    
     val = len(f)/4
-
-    val1 = val*0
+    
+    val1 = val*1
     val2 = val*2
 
     f = f[val1:val2]
-
 
     for filepth in f:
         enclosure_queue.put(filepth)

@@ -28,8 +28,8 @@ def main(filepath):
 
     val = len(f)/6
 
-    val1 = val*2
-    val2 = val*3
+    val1 = val*4
+    val2 = val*5
 
     f = f[val1:val2]
     

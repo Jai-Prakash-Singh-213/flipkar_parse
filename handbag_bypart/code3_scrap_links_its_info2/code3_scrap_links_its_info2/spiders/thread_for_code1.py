@@ -25,7 +25,7 @@ def main(filepath):
 
     f = glob.glob(filepath+'/*.html')
 
-    val = len(f)/4
+    val = len(f)/6
 
     val1 = val*1
     val2 = val*2

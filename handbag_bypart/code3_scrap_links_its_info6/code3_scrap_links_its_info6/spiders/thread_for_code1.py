@@ -28,10 +28,10 @@ def main(filepath):
 
     val = len(f)/6
 
-    val1 = val*2
-    val2 = val*3
+    val1 = val*5
+    val2 = val*6
 
-    f = f[val1:val2]
+    f = f[val1:]
     
 
     for i in range(num_fetch_threads):

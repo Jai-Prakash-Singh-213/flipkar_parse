@@ -84,12 +84,14 @@ def main():
         print filepath+'/*.html'
         print f
 
-        val = len(f)/6
+        val = len(f)/3
 
         val1 =  val*2
         val2 = val*3
        
-        main2(filepath, f) 
+        f2 = f[val1:]
+       
+        main2(filepath, f2) 
 
     finishtime = time.strftime("%H:%M:%S")
     

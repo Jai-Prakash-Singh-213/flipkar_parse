@@ -82,11 +82,14 @@ def main():
         f = glob.glob(filepath+'/*.html')
 
         print filepath+'/*.html'
-        print f
+        #print f
 
-        val = len(f)/6
+        val = len(f)/3
 
-        for i in range(6):
+        val1 = val*0
+        val2 = val*1
+
+        '''for i in range(6):
              try:
                  f = f[ : val]
              except:
@@ -94,7 +97,13 @@ def main():
 
              p = multiprocessing.Process(target = main2, args=(filepath, f ))
              f = f[val : ]
-             p.start()
+             p.start()'''
+       
+
+        f2 = f[val1:val2]
+
+        main2(filepath, f2 )
+
     finishtime = time.strftime("%H:%M:%S")
     
     print (starttime, finishtime)

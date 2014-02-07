@@ -29,23 +29,19 @@ def main4(directory, sub_link):
     link_split = sub_link.split("/")[-2]
 
     if re.search(".*~brand", link.split("/")[-2]):
-        filename = directory + "/" + sub_link_its_already_brand_.txt
+        filename = directory + "/sub_link_its_already_brand_.txt"
 	f = open(filename, "a+")
 	print >>f, link
 	f.close()
 
     if soup.find("ul", attrs={"id":"brand"}):
-        filename = directory + "/" + sublink_extract_brand_from_it.txt
+        filename = directory + "/sublink_extract_brand_from_it.txt"
 	f = open(filename, "a+")
 	print >>f, link
 	f.close()
 
 
     
-
-
-
-
 def main3(i, q):
     while True:
         directory, link = q.get()
@@ -56,7 +52,7 @@ def main3(i, q):
         page.close()
 
 	if soup.find("ul", attrs={"id":"brand"}):
-	    filename = directory + "/" + extract_brand_from_it.txt
+	    filename = directory + "/extract_brand_from_it.txt"
 	    f = open(filename, "a+")
 	    print >>f, link
 	    f.close()
@@ -64,7 +60,7 @@ def main3(i, q):
 	link_split = link.split("/")[-2]
         
 	if re.search(".*~brand", link.split("/")[-2]):
-	    filename = directory + "/" + its_already_brand_.txt
+	    filename = directory + "/its_already_brand_.txt"
 	    f = open(filename, "a+")
 	    print >>f, link
 	    f.close()
@@ -79,6 +75,7 @@ def main3(i, q):
 		    t.start()
 	        except:
 	            pass
+
 
 
 
@@ -111,7 +108,11 @@ def main():
     #print >>f, dict_menu_links
     #f.close()
 
-    dat = time.strftime("%d%m%Y")
+    dat = time.strftime("dir%d%m%Y")
+    
+    f = open("availdir", "a+")
+    print >>f, dat
+    f.close()
 
     f = open("dict_menu_links")
     dict_menu_links = eval(f.read().strip())

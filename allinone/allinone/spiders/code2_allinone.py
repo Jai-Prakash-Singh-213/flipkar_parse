@@ -7,6 +7,7 @@ from threading import Thread
 import time
 import urll_proxy
 from bs4 import BeautifulSoup
+import threading
 
 num_fetch_threads = 20
 enclosure_queue = Queue()
@@ -15,6 +16,34 @@ enclosure_queue = Queue()
 
 def mystrip(x):
     return x.strip()
+
+
+
+def main4(directory, sub_link):
+    
+    page = urll_proxy.main(sub_link)
+    html = page.read()
+    soup = BeautifulSoup(html)
+    page.close()
+ 
+    link_split = sub_link.split("/")[-2]
+
+    if re.search(".*~brand", link.split("/")[-2]):
+        filename = directory + "/" + sub_link_its_already_brand_.txt
+	f = open(filename, "a+")
+	print >>f, link
+	f.close()
+
+    if soup.find("ul", attrs={"id":"brand"}):
+        filename = directory + "/" + sublink_extract_brand_from_it.txt
+	f = open(filename, "a+")
+	print >>f, link
+	f.close()
+
+
+    
+
+
 
 
 def main3(i, q):
@@ -32,15 +61,29 @@ def main3(i, q):
 	    print >>f, link
 	    f.close()
 
-	if 
+	link_split = link.split("/")[-2]
+        
+	if re.search(".*~brand", link.split("/")[-2]):
+	    filename = directory + "/" + its_already_brand_.txt
+	    f = open(filename, "a+")
+	    print >>f, link
+	    f.close()
 
+        tag_nav = soup.find("div", attrs={"class":"nav-section-cat-list"})
 
-
+	if tag_nav:
+	    for  l in tag_nav:
+	        try:
+		    sub_link = "http://www.flipkart.com" + l.get("href")
+	            t = threading.Thread(target=main4, args=(directory, sub_link))
+		    t.start()
+	        except:
+	            pass
 
 
 
 def main2(dte, menu, links_list):
-    directory = dte + "/" +menu
+    directory = dte + "/" + menu
 
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -77,9 +120,6 @@ def main():
     for menu, links_list in dict_menu_links.items():
         p = multiprocessing.Process(target=main2, args=(dte, menu, links_list))
 	p.start()
-        
-	    
-        
 
     
 

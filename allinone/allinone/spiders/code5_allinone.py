@@ -2,7 +2,8 @@
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
-
+from random import choice 
+import time
 
 
 def main(dirthree, brandname, brandlink):
@@ -13,15 +14,26 @@ def main(dirthree, brandname, brandlink):
     f2 = open("/home/user/Desktop/proxy_http_auth.txt")
     proxy_list = f2.read().strip().split("\n")
     f2.close()
+    
+    loop = True
+    while loop is  True:
 
-    ip_port = choice(proxy_list).strip()
+        ip_port = choice(proxy_list).strip()
 
-    user_pass = ip_port.split("@")[0].strip()
-    prox = "--proxy=%s"%ip_port.split("@")[1].strip()
-    service_args = [prox, '--proxy-auth='+user_pass, '--proxy-type=http', '--load-images=no']
-    driver = webdriver.PhantomJS(service_args = service_args)
+        user_pass = ip_port.split("@")[0].strip()
+        prox = "--proxy=%s"%ip_port.split("@")[1].strip()
+        service_args = [prox, '--proxy-auth='+user_pass, '--proxy-type=http', '--load-images=no']
+        driver = webdriver.PhantomJS(service_args = service_args)
 
-    driver.get(brandlink)
+        driver.get(brandlink)
+        
+        if str(driver.current_url).strip() == "about:blank":
+            loop = True
+
+        else:
+            loop = False
+
+
 
     for i in range(0,30):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -48,8 +60,12 @@ def main(dirthree, brandname, brandlink):
 
 
     page = driver.page_source
+    print driver.current_url
+    print page
+
     driver.delete_all_cookies()
     driver.close()
+
 
     filename = dirthree + "/" + brandname + ".csv"
     f = open(filename, "a+")
@@ -60,9 +76,10 @@ def main(dirthree, brandname, brandlink):
     
     
     for link in tag_a:
-        link = str(link.get("href").strip())
-	link = "http://www.flipkart.com"+link
-	print >>f, link
+        link = link.get("href")
+        if link != "#":
+	    link = "http://www.flipkart.com" + str(link).strip()
+	    print >>f, link
 
     f.close()
 

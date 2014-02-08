@@ -11,7 +11,7 @@ import time
 import sys
  
 
-num_fetch_threads = 20
+num_fetch_threads = 10
 enclosure_queue = Queue()
 
 def main3(i, q):
@@ -49,9 +49,9 @@ def main3(i, q):
 	
 def main2(pth):
 
-    dirtwo = "dirtwo" + pth.split("/")[0][:-8]
+    dirtwo = "dirtwo" + pth.split("/")[0][-8:]
 
-    f = open("availdirtwo", "a+")
+    f = open("availdirtwo", "w")
     print >>f, dirtwo
     f.close()
     

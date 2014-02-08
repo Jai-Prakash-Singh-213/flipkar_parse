@@ -5,7 +5,7 @@ import sys
 import os
 import time
 
-f = open("/home/keshu/Desktop/proxy5")
+f = open("/home/user/Desktop/proxy5")
 ip_list = f.read().strip().split("\n")
 f.close()
 

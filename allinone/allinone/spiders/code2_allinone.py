@@ -8,8 +8,9 @@ import time
 import urll_proxy
 from bs4 import BeautifulSoup
 import threading
+import re
 
-num_fetch_threads = 20
+num_fetch_threads = 30
 enclosure_queue = Queue()
 
 
@@ -28,16 +29,16 @@ def main4(directory, sub_link):
  
     link_split = sub_link.split("/")[-2]
 
-    if re.search(".*~brand", link.split("/")[-2]):
+    if re.search(".*~brand", sub_link.split("/")[-2]):
         filename = directory + "/sub_link_its_already_brand_.txt"
 	f = open(filename, "a+")
-	print >>f, link
+	print >>f, sub_link
 	f.close()
 
     if soup.find("ul", attrs={"id":"brand"}):
         filename = directory + "/sublink_extract_brand_from_it.txt"
 	f = open(filename, "a+")
-	print >>f, link
+	print >>f, sub_link
 	f.close()
 
 
@@ -108,10 +109,10 @@ def main():
     #print >>f, dict_menu_links
     #f.close()
 
-    dat = time.strftime("dir%d%m%Y")
+    dte = time.strftime("dir%d%m%Y")
     
     f = open("availdir", "a+")
-    print >>f, dat
+    print >>f, dte 
     f.close()
 
     f = open("dict_menu_links")

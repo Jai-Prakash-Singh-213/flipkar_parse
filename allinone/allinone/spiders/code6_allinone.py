@@ -8,9 +8,14 @@ import time
 import sys
 from Queue import Queue
 from threading import Thread
+import  logging
 
 num_fetch_threads = 20
 enclosure_queue = Queue()
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+                    )
 
 
 def main2(i, q):
@@ -19,6 +24,7 @@ def main2(i, q):
         
         item_link = l
         page = urll_proxy.main(l)
+        assert page
         soup = BeautifulSoup(page)
         page.close()
 
@@ -30,12 +36,21 @@ def main2(i, q):
            item_clour = str(tag_colour.get_text()).strip()
         except:
            item_clour = " No more colour"
-
+        
+      
         tag_img = soup.find("img", attrs={"id":"visible-image-small"})
         item_image = tag_img.get("src")
+        
+        try:
+            tag_price = soup.find("span", attrs={"class":"fk-font-verybig pprice fk-bold"})
+            item_price = str(tag_price.get_text()).strip()
+        except:
+            f = open("errorfile", "a+")
+            print >>f, l
+            f.close()
+            tag_price = soup.find("div", attrs={"class":"prices"})
+            item_price = str(tag_price.get_text()).strip().replace("\n", " ")
 
-        tag_price = soup.find("span", attrs={"class":"fk-font-verybig pprice fk-bold"})
-        item_price = str(tag_price.get_text()).strip()
 
         try:
            tag_mrp = soup.find("span", attrs={"id":"fk-mprod-list-id"})
@@ -59,7 +74,7 @@ def main2(i, q):
             
             for l in tag_multiselect:
                 try: 
-                    size.append(l.get_text())
+                    size.append(str(l.get_text()))
                 except:
                     pass
         except:
@@ -68,7 +83,7 @@ def main2(i, q):
         if not size:
             size.append("No size defined")
         
-        size2 = ' '.join(size) 
+        size2 = ' '.join(size).replace("\n", " ") 
 
         del size[:]
         del size
@@ -79,7 +94,12 @@ def main2(i, q):
         print >>f, ','.join([date, catname, brandname,  item_title, item_price, 
                              item_image, item_clour, item_mrp, item_seller, item_link, sku, size2])
         f.close()
+         
+        logging.debug([date, catname, brandname,  item_title, item_price,
+                             item_image, item_clour, item_mrp, item_seller, item_link, sku, size2])
 
+        time.sleep(2)
+        q.task_done()
 
 
 def main(pth):
@@ -91,9 +111,12 @@ def main(pth):
     brandname = pth.split("/")[-1][:-3]
 
     filename = dirfour + "/" + pth.split("/")[-1].strip()
-
-    if not os.path.exists(dirfour):
-        os.makedirs(dirfour)
+    
+    try:
+        if not os.path.exists(dirfour):
+            os.makedirs(dirfour)
+    except:
+        pass
     
     f = open(pth)
 

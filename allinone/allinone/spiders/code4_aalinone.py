@@ -6,6 +6,7 @@ import time
 import logging
 from threading import Thread
 import os
+import code5_allinone
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -27,6 +28,8 @@ def main3(i2, q2):
 	brandlink = line.split(",")[4]
 
 	logging.debug((dirthree, brandname, brandlink))
+
+        code5_allinone.main(dirthree, brandname, brandlink)
 
 	q2.task_done()
 

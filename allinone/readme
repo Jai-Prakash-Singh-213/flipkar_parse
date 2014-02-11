@@ -1,0 +1,93 @@
+# python code1_allinone
+	# takes link or flipkart 
+	# find all menu 
+	# find all menu item 
+	# make a dictionar {menu:its link }
+	# return this dictionary
+
+python code2_allinone.py
+	# call code1_allinone.py
+	# takes return dictionary from it 
+	# save it in a file names "dict_menu_links"
+	# make a directory like ("dir08022014")
+	# open a file "availdir" save this "directory"
+	#  
+
+	# open file dict_menu_link , read dictionar from it 
+	# start multi process on menu and its links 
+	# pass dat, menu, and menulinks to main2
+	# create a directory name menu in dte(dir0802014)
+	# apply thread on menulinks
+	# divide menulinks in extracted brands from it /its already a brands /sub_link_extractedbrandsfrom it/sublink_extract_brand_from_it.txt
+
+
+python code3_allinone.py
+	# open file availdir
+	# find .txt file from this directory 
+	# i did (["find",  dirone,  "-name",  "extract_brand_from_it.txt"]) as only i kneede it 
+	# find command retrun extracted file with its path 
+	# apply multiprocess on  path
+	# make dirtwo (dirtwo08022014)
+	# open file  "availdirtwo" save this dir to it 
+	# make directory (dirtwo08022014/women)
+	# read file one by one for its links 
+	# apply thred on it 
+	# pass (directory(dirtwo08022014/women), links) to main(3)	
+	# make dir (dirtwo08022014/women/handbag)
+	# make file like "jewellery-xx-earrings-xx-bnbcbl.csv" in dir like(dirtwo08022014/women/jewellery)
+	# save  ','.join([date, str(pos), brand_name, brand_count, brand_link]) in this file 
+
+
+python code4_allinone.py
+	# open file availdirtwo take dir from it (dirtwo080214)
+	# find output = subprocess.check_output(["find",  dirtwo , "-name",  "*.csv"]
+	# i did  output = subprocess.check_output(["find",  dirtwo+"/women/bags-wallets-belts/", "-name",  "*.csv"])
+	# read path from out one by one and apply multiprocess  on it 
+	# pass path to main2(pth)
+	# mek dir like 
+	#     dirthree08022014/
+|-- baby-kids
+|   |-- baby-care
+|   |   |-- baby-care-xx-baby-bedding-xx-bnbcbl
+|   |   |   |-- Abracadabra.csv
+|   |   |   |-- Advance Baby.csv
+
+	# open file availdirthree save "dirthree08022014" into it 
+	# read line prom path 
+	# applly multiprocess on it 
+	# pass main3(dirthree, line)
+	# call code5_allinone.main(dirthree, brandname, brandlink)
+
+
+# python code5_allinone.py
+	# take dirthree , brandname , brandlink 
+	# scroll the brand link 
+	# save the link ints respective brands
+dirthree08022014/
+|-- baby-kids
+|   |-- baby-care
+|   |   |-- baby-care-xx-baby-bedding-xx-bnbcbl
+|   |   |   |-- Abracadabra.csv
+|   |   |   |-- Advance Baby.csv
+
+
+
+python code7_allinone.py
+	# open availdirthree dirthree08022014
+	# output = subprocess.check_output(["find", dirthree,  "-name",  "*.csv"])
+	# multiprocessing.Process(target=main2, args=(i, mp_enclosure_queue,))
+	# code6_allinone.main(pth) in main2 
+
+#python code6_allinone.py
+	#make dir like
+	#  dirfour08022014/
+|-- baby-kids
+|   `-- baby-care
+|       |-- baby-care-xx-bath-care-xx-bnbcbl
+|       `-- baby-care-xx-grooming-xx-bnbcbl
+|           |-- Baby Dreams.csv
+|           |-- Bella Baby.csv
+	# save data into ccsv 
+	#  print >>f, ','.join([date, catname, brandname,  item_title, item_price,
+                             item_image, item_clour, item_mrp, item_seller, item_link, sku, size2])
+

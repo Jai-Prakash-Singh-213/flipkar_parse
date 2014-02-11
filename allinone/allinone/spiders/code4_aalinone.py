@@ -7,6 +7,7 @@ import logging
 from threading import Thread
 import os
 import code5_allinone
+import sys
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -78,8 +79,12 @@ def main():
     dirtwo = f.read().strip()
     f.close()
 
-    output = subprocess.check_output(["find",  dirtwo , "-name",  "*.csv"])
+    #output = subprocess.check_output(["find",  dirtwo , "-name",  "*.csv"])
+    output = subprocess.check_output(["find",  dirtwo+"/women/bags-wallets-belts/", "-name",  "*.csv"])
     output = output.strip().split("\n")
+
+    #print output
+    #sys.exit()
 
     for i in range(mp_num_fetch_threads):
         worker = multiprocessing.Process(target=main2, args=(i, mp_enclosure_queue,))

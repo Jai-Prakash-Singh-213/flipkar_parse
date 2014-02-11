@@ -10,7 +10,7 @@ from Queue import Queue
 from threading import Thread
 import  logging
 
-num_fetch_threads = 20
+num_fetch_threads = 30
 enclosure_queue = Queue()
 
 logging.basicConfig(level=logging.DEBUG,
@@ -106,7 +106,7 @@ def main(pth):
     dirfour = "dirfour"  +  pth.split("/")[0].strip()[-8:]
     dirfour = dirfour + "/" +  "/".join(pth.split("/")[1:-1])
 
-    catname = pth.split("/")[-2].split("-xx-")[1].strip()
+    catname = pth.split("/")[-2].split("-xx-")[-2].strip()
 
     brandname = pth.split("/")[-1][:-3]
 

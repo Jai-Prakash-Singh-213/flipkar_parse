@@ -6,7 +6,7 @@ import time
 import code6_allinone
 import logging
 
-mp_num_fetch_threads = 20
+mp_num_fetch_threads = 10
 mp_enclosure_queue = multiprocessing.Queue()
 
 
@@ -29,8 +29,9 @@ def main():
     f = open("availdirthree")
     dirthree = f.read().strip()
     f.close()
-
-    output = subprocess.check_output(["find", dirthree + "/women/bags-wallets-belts",  "-name",  "*.csv"])
+      
+    #output = subprocess.check_output(["find", dirthree,  "-name",  "*.csv"])
+    output = subprocess.check_output(["find", dirthree + "/women/",  "-name",  "*.csv"])
     pth_list = output.strip().split("\n")
 
     for i in range(mp_num_fetch_threads):

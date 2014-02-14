@@ -9,8 +9,9 @@ import sys
 from Queue import Queue
 from threading import Thread
 import  logging
+import req_proxy
 
-num_fetch_threads = 30
+num_fetch_threads = 20
 enclosure_queue = Queue()
 
 logging.basicConfig(level=logging.DEBUG,
@@ -23,10 +24,12 @@ def main2(i, q):
         filename, brandname, catname, l = q.get()
         
         item_link = l
-        page = urll_proxy.main(l)
-        assert page
+        #page = urll_proxy.main(l)
+        #assert page
+        page = req_proxy.main(l)
+        
         soup = BeautifulSoup(page)
-        page.close()
+        #page.close()
 
         tag_h1 = soup.find("h1", attrs={"itemprop":"name"})
         item_title = str(tag_h1.get_text()).strip()
@@ -103,7 +106,7 @@ def main2(i, q):
 
 
 def main(pth):
-    dirfour = "dirfour"  +  pth.split("/")[0].strip()[-8:]
+    dirfour = "dirfour_2_"  +  pth.split("/")[0].strip()[-8:]
     dirfour = dirfour + "/" +  "/".join(pth.split("/")[1:-1])
 
     catname = pth.split("/")[-2].split("-xx-")[-2].strip()

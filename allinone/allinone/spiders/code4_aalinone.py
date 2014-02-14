@@ -14,10 +14,10 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
                     )
 
-mp_num_fetch_threads = 10
+mp_num_fetch_threads = 5
 mp_enclosure_queue = multiprocessing.Queue()
 
-num_fetch_threads = 10
+num_fetch_threads = 20
 enclosure_queue = Queue()
 
 
@@ -80,7 +80,7 @@ def main():
     f.close()
 
     #output = subprocess.check_output(["find",  dirtwo , "-name",  "*.csv"])
-    output = subprocess.check_output(["find",  dirtwo+"/women/bags-wallets-belts/", "-name",  "*.csv"])
+    output = subprocess.check_output(["find",  dirtwo, "-name",  "*.csv"])
     output = output.strip().split("\n")
 
     #print output

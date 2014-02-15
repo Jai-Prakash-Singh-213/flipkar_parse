@@ -5,7 +5,8 @@ import urllib2
 
 def main(url):
     #f = open("/home/keshu/Desktop/procxies/proxy_http_auth.txt")
-    f = open("/home/user/Desktop/proxy5")
+    #f = open("/home/user/Desktop/proxy5")
+    f = open("/home/desktop/proxy5")
     file_pass_ip = f.read().strip().split('\n')
     f.close()
 

@@ -14,10 +14,10 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
                     )
 
-mp_num_fetch_threads = 10
+mp_num_fetch_threads = 5
 mp_enclosure_queue = multiprocessing.Queue()
 
-num_fetch_threads = 10
+num_fetch_threads = 20
 enclosure_queue = Queue()
 
 
@@ -25,8 +25,8 @@ def main3(i2, q2):
     while True:
         dirthree, line = q2.get()
 
-	brandname = line.split(",")[2]
-	brandlink = line.split(",")[4]
+	brandname = line.split(",")[2].strip()
+	brandlink = line.split(",")[4].strip()
 
 	logging.debug((dirthree, brandname, brandlink))
 
@@ -42,10 +42,10 @@ def main2(i, q):
         pth = q.get()
         logging.debug(pth)
 
-        dirthree = "dirthree" + pth.split("/")[0][-8:] + "/" + "/".join(pth.split("/")[1:-1]) + "/" + pth.split("/")[-1][:-4]
+        dirthree = "dirthree_men_" + pth.split("/")[0][-8:] + "/" + "/".join(pth.split("/")[1:-1]) + "/" + pth.split("/")[-1][:-4]
 
         f = open("availdirthree","w")
-        print >>f,  "dirthree" + pth.split("/")[0][-8:]
+        print >>f,  "dirthree_men_" + pth.split("/")[0][-8:]
         f.close()
 
         if not os.path.exists(dirthree):
@@ -56,7 +56,7 @@ def main2(i, q):
 
         for i in range(num_fetch_threads):
             worker2 = Thread(target=main3, args=(i, enclosure_queue,))
-            #worker2.setDaemon(True)
+            worker2.setDaemon(True)
             worker2.start()
 
 
@@ -80,9 +80,16 @@ def main():
     f.close()
 
     #output = subprocess.check_output(["find",  dirtwo , "-name",  "*.csv"])
-    output = subprocess.check_output(["find",  dirtwo+"/women/bags-wallets-belts/", "-name",  "*.csv"])
+    output = subprocess.check_output(["find",  dirtwo + "/men/",  "-name",  "*.csv"])
     output = output.strip().split("\n")
 
+    #print output
+    #sys.exit()
+
+    #output2 = subprocess.check_output(["find",  dirtwo+"/men/", "-name",  "*.csv"])
+    #output2 = output2.strip().split("\n")
+
+    #output.extend(output2)
     #print output
     #sys.exit()
 

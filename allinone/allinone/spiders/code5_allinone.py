@@ -11,7 +11,8 @@ def main(dirthree, brandname, brandlink):
     brandname = brandname.strip()
     brandlink = brandlink.strip()
 
-    f2 = open("/home/user/Desktop/proxy_http_auth.txt")
+    #f2 = open("/home/user/Desktop/proxy_http_auth.txt")
+    f2 = open("/home/desktop/proxy_auth.txt")
     proxy_list = f2.read().strip().split("\n")
     f2.close()
     

@@ -25,6 +25,54 @@ def worker(i,q):
 
 
 
+def remain_link(cat):
+
+    f = open("page1_link_crawled", "rw+")
+    links_crawled = f.read().strip().split("\n")
+    f.truncate(0)
+    f.close()
+
+    f = open("page1_link_crawling", "rw+")
+    links_crawling =  f.read().strip().split("\n")
+    f.truncate(0)
+    f.close()
+
+    print len(links_crawling)
+    print len(links_crawled)
+    
+
+    avail_link = list(set(links_crawling) - set(links_crawled))
+    
+    print avail_link
+    
+    if avail_link:
+        
+        print "*"*50
+        print "crawling again....."
+
+        f = avail_link[ : ]
+
+        for i in range(num_fetch_threads):
+            t = Thread(target=worker, args=(i, enclosure_queue,))
+            t.setDaemon(True)
+            t.start()
+    
+
+        for brand_url_string in f:
+            brand_url_string = brand_url_string.strip()
+            enclosure_queue.put((cat, brand_url_string))
+
+        print '*** Main thread waiting ***'
+        enclosure_queue.join()
+        print '*** Done **'
+        
+        remain_link(cat)
+    
+    else:
+        return 0
+
+
+
     
 
 def main(cat, filename):
@@ -51,11 +99,11 @@ def main(cat, filename):
     print '*** Main thread waiting ***'
     enclosure_queue.join()
     print '*** Done ***'
-    
-    
+
+    remain_link(cat)
 
     return 0
-
+    
     
 if __name__=="__main__":
     

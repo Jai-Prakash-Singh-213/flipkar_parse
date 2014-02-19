@@ -13,8 +13,9 @@ import time
 from selenium.webdriver.common.action_chains import  ActionChains
 from bs4 import BeautifulSoup
 import re
+import os
 import  subprocess
-
+import sys
 
 
 class DmozSpider(BaseSpider):
@@ -66,7 +67,22 @@ class DmozSpider(BaseSpider):
         date = str(time.strftime("%d/%m/%Y")).strip()
 
         link = str(response.url).strip()
+         
+        currentdate = time.strftime("-%d-%m-%Y")
 
-        f = open(brandname+".csv", "a+")
+        currentdir = os.getcwd()
+
+        filename = brandname+".csv"
+
+        fdir =  currentdir + "/item_details_csv/" + currentdate
+
+        if not os.path.exists(fdir):
+            subprocess.check_output(['mkdir', '-p', fdir])
+
+        filename = fdir + "/" + brandname + ".csv"
+
+        f = open(filename,"a+")
+
+        
         print >>f, ','.join([date, item_title, item_price, item_image, item_clour, item_discount, item_seller, link])
         f.close()    

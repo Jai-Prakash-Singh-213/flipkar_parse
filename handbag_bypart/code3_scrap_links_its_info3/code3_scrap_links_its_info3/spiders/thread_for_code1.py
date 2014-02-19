@@ -5,16 +5,17 @@ import time
 import os
 import glob
 import time
+import sys
 
-num_fetch_threads = 100
+num_fetch_threads = 5
 enclosure_queue = Queue()
 
 
 def worker(i,q):
     while True:
         filepth = q.get()
-        
-        subprocess.call(['scrapy', 'crawl',  'collect_link_and_extract', '-a', 'filepath='+filepth])
+        fpath = "/home/desktop/flipkart/handbag_bypart/code3_scrap_links_its_info3/code3_scrap_links_its_info3/spiders/"    
+        subprocess.call(['scrapy', 'runspider',  fpath+'code1_linkcollection_and_extract.py', '-a', 'filepath='+filepth])
 	time.sleep(2)
         q.task_done()
 
@@ -58,5 +59,7 @@ def main(filepath):
 
     
 if __name__=="__main__":
-    filepath = "/home/desktop/flipkart/handbag_bypart/code2_scrolling/code2_scrolling/spiders/"
+    cat_dir = sys.argv[1].strip()
+    filepath = "/home/desktop/flipkart/handbag_bypart/brands_htmls/"+ cat_dir
+
     main(filepath)

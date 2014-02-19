@@ -25,10 +25,11 @@ class DmozSpider(Spider):
     allowed_domains = ["flipkart.com"]
 
 
-    def __init__(self, filepath = None,  *args, **kwargs):
+    def __init__(self, filepath = None, cat = None,   *args, **kwargs):
 
         #print filepath
         #sys.exit()
+        self.cat = cat[:-8]
 
         self.brandname = filename = filepath.split('/')[-1].strip().split(".")[0]
 
@@ -41,13 +42,17 @@ class DmozSpider(Spider):
         
     def parse(self, response):
         
-       
+               
         brandname = self.brandname
         #print brandname
         #sys.exit()
 
         page = response.body
         soup = BeautifulSoup(page)
+
+        tag_dec = soup.find("div", attrs={"id":"description"})
+	tag_dec = str(tag_dec)
+
 
         tag_h1 = soup.find("h1", attrs={"itemprop":"name"})
         item_title = str(tag_h1.get_text()).strip()
@@ -93,5 +98,5 @@ class DmozSpider(Spider):
         f = open(filename,"a+")
 
         
-        print >>f, ','.join([date, item_title, item_price, item_image, item_clour, item_discount, item_seller, link])
+        print >>f, ','.join([date, self.cat.strip(), brandname,  item_title, item_price, item_image, item_clour, item_discount, item_seller, link, tag_dec])
         f.close()    

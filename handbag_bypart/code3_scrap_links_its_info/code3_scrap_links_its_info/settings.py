@@ -13,10 +13,11 @@ NEWSPIDER_MODULE = 'code3_scrap_links_its_info.spiders'
 
 
 TELNETCONSOLE_HOST = '127.0.0.1' # defaults to 0.0.0.0 set so
-TELNETCONSOLE_PORT = '6077'      # only we can see it.
+TELNETCONSOLE_PORT = '6000'      # only we can see it.
 TELNETCONSOLE_ENABLED = False
-
+COOKIES_ENABLED = False
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
+
 #USER_AGENT = 'code3_scrap_links_its_info (+http://www.yourdomain.com)'
 
 

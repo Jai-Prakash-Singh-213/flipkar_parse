@@ -11,7 +11,7 @@ def main(url):
     while True:
         try:
             pass_ip = random.choice(file_pass_ip).strip()
-            print pass_ip
+            #print pass_ip
             proxy = urllib2.ProxyHandler({'http': 'http://'+pass_ip})
             auth = urllib2.HTTPBasicAuthHandler()
             opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)

@@ -22,22 +22,24 @@ logging.basicConfig(level=logging.DEBUG,
 
 def worker(i,q):
     while True:
-        filepth = q.get().strip()
+        filepth, cat = q.get()
+        filepth = filepth.strip()
+        cat = cat.strip()
 
 	currentdir = os.getcwd()
 
         codes = currentdir + "/code3_scrapy.py"
  
-        logging.debug(['scrapy', 'runspider',  codes, '-a', 'filepath='+filepth])
+        logging.debug(['scrapy', 'runspider',  codes, '-a', 'filepath='+filepth, '-a', 'cat='+cat])
         #sys.exit()
-        subprocess.call(['scrapy', 'runspider',  codes,  '-a', 'filepath='+filepth])
+        subprocess.call(['scrapy', 'runspider',  codes,  '-a', 'filepath='+filepth, '-a', 'cat='+cat])
 	time.sleep(2)
         q.task_done()
 
 
 
 
-def main2(filepath, f):
+def main2(filepath, f, cat):
 
         
 
@@ -49,7 +51,7 @@ def main2(filepath, f):
 
 
     for filepth in f:
-        enclosure_queue.put(filepth)
+        enclosure_queue.put((filepth, cat))
 
     print '*** Main thread waiting ***'
     startime = time.strftime("%I:%M:%S")
@@ -102,7 +104,7 @@ def main():
 
         f2 = f[val1:val2]
 
-        main2(filepath, f2 )
+        main2(filepath, f2, cat)
 
     finishtime = time.strftime("%H:%M:%S")
     

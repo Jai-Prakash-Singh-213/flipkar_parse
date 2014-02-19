@@ -11,6 +11,9 @@ BOT_NAME = 'allinone'
 SPIDER_MODULES = ['allinone.spiders']
 NEWSPIDER_MODULE = 'allinone.spiders'
 
+WEBSERVICE_ENABLED = False
+TELNETCONSOLE_ENABLED  = False
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'allinone (+http://www.yourdomain.com)'
 

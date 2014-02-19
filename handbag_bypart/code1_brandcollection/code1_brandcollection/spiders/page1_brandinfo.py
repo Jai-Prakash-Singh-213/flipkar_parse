@@ -5,18 +5,30 @@ import sys
 import MySQLdb
 import os
 import shutil
+import phan_proxy
+import subprocess
 
+def main(link):
 
-
-def main():
-
-    link = "http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?sid=reh%2Cihu%2Cm08"
     page = urll_proxy.main(link)
     soup = BeautifulSoup(page)
     tag_ul = soup.find_all("ul", attrs={"id":"brand"})
 
-    f  = open("page1_bn_bl_bc.csv","a+")
-    f2 = open("page1_brandname_brandlink", "a+")
+    cat_name = link.split("/")[-2].strip()
+    
+    currentdir = os.getcwd()
+
+    currentdate = time.strftime("-%d-%m-%Y")
+
+    branddir = currentdir+"/brand_info_by_date/"+cat_name+currentdate
+
+    if not os.path.exists(branddir):
+        subprocess.check_output(['mkdir', '-p', branddir])
+    
+    fname = branddir+"/"+cat_name
+
+    f = open(fname+"_bn_bc_bl.csv","a+")
+    f2 = open(fname+"_brandname_brandlink.csv", "a+")
 
     tag_a = tag_ul[0].find_all("a")
      
@@ -33,9 +45,10 @@ def main():
 
     f.close()
     f2.close()
+    print fname+"_brandname_brandlink.csv"
 
-    shutil.copy2("page1_bn_bl_bc.csv", "page1_bn_bl_bc_new.csv")
-    os.remove("page1_bn_bl_bc.csv")
+    #shutil.copy2(cat_name+"_bn_bl_bc.csv", cat_name+"_bn_bl_bc_old.csv")
+    #os.remove(cat_name+"_bn_bl_bc.csv")
     
 
 
@@ -64,6 +77,6 @@ def addin_to_mysql():
 
 
 if __name__=="__main__":
-    main() 
-    addin_to_mysql()
+    main(sys.argv[1]) 
+    #addin_to_mysql()
 

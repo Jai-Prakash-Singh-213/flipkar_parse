@@ -23,8 +23,9 @@ pythomn thread_on_scrolling.py
         # collect brandname and brand links and pass it to subprocess  under 
 	# scrapy crawl page1_scroll -a brand_and_url="Butterflies,http://www.flipkart.com/bags-wallets-belts/bags/hand-bags/pr?p%5B0%5D=facets.brand%255B%255D%3DButterflies&sid=reh%2Cihu%2Cm08"
 
+dri code3.....
 
-#scrapy crawl collect_link_and_extract -a filepath="/home/desktop/flipkart/handbag_bypart/code2_scrolling/code2_scrolling/spiders/Justclik.html"
+scrapy crawl collect_link_and_extract -a filepath="/home/desktop/flipkart/handbag_bypart/code2_scrolling/code2_scrolling/spiders/Justclik.html"
 	# take file path from argument 
 	# extract its brandname
 	# extract  linke from file using cat funda and cubporcess

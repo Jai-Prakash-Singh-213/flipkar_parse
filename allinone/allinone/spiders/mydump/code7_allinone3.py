@@ -3,6 +3,7 @@
 import subprocess
 import multiprocessing
 import time
+<<<<<<< HEAD
 import code6_allinone3
 import logging
 from Queue import Queue
@@ -11,6 +12,14 @@ import os
 
 num_fetch_threads = 150
 enclosure_queue = Queue()
+=======
+import code6_allinone2
+import logging
+
+mp_num_fetch_threads = 5
+mp_enclosure_queue = multiprocessing.Queue()
+
+>>>>>>> a0099e0a269d70bd87a7493005e633efedffbbb1
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -19,14 +28,23 @@ logging.basicConfig(level=logging.DEBUG,
 
 def main2(i, q):
     while True:
+<<<<<<< HEAD
         filename, brandname, catname, l = q.get()
         code6_allinone3.main(filename, brandname, catname, l)
         time.sleep(2)
         q.task_done()
+=======
+        pth = q.get()
+	logging.debug(pth)
+        code6_allinone.main(pth)
+        time.sleep(2)
+        #q.task_done()
+>>>>>>> a0099e0a269d70bd87a7493005e633efedffbbb1
     
     
 
 def main():
+<<<<<<< HEAD
     #f = open("availdirthree")
     #dirthree = f.read().strip()
     #f.close()
@@ -69,6 +87,32 @@ def main():
     f.close()
     print '*** Done'         
 
+=======
+    f = open("availdirthree")
+    dirthree = f.read().strip()
+    f.close()
+      
+    #output = subprocess.check_output(["find", dirthree,  "-name",  "*.csv"])
+    output = subprocess.check_output(["find", dirthree,  "-name",  "*.csv"])
+    pth_list = output.strip().split("\n")
+
+    val = len(pth_list)/5
+    val1 = val*1
+    val2 = val*2
+
+    pth_list = pth_list[val1:val2]
+
+    #for i in range(mp_num_fetch_threads):
+    #    worker = multiprocessing.Process(target=main2, args=(i, mp_enclosure_queue,))
+	#worker.setDaemon(True)
+    #	worker.start()
+
+    #for pth in pth_list:
+    #     mp_enclosure_queue.put(pth)
+         
+    for pth in pth_list:
+        code6_allinone2.main(pth)
+>>>>>>> a0099e0a269d70bd87a7493005e633efedffbbb1
 
     
 

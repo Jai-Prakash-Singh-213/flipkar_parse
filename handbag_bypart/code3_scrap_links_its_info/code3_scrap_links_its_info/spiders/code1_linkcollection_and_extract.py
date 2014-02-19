@@ -13,11 +13,13 @@ import time
 from selenium.webdriver.common.action_chains import  ActionChains
 from bs4 import BeautifulSoup
 import re
+import os
 import  subprocess
+import sys
+from scrapy.spider import Spider
 
 
-
-class DmozSpider(BaseSpider):
+class DmozSpider(Spider):
     name = "collect_link_and_extract"
 
     allowed_domains = ["flipkart.com"]
@@ -25,16 +27,24 @@ class DmozSpider(BaseSpider):
 
     def __init__(self, filepath = None,  *args, **kwargs):
 
+        #print filepath
+        #sys.exit()
+
         self.brandname = filename = filepath.split('/')[-1].strip().split(".")[0]
 
         output = subprocess.check_output(["cat", filepath])	
 
         self.start_urls = output.strip().split("\n")        
+        #print self.start_urls
+        #sys.exit()
    
         
     def parse(self, response):
         
+       
         brandname = self.brandname
+        #print brandname
+        #sys.exit()
 
         page = response.body
         soup = BeautifulSoup(page)
@@ -66,7 +76,22 @@ class DmozSpider(BaseSpider):
         date = str(time.strftime("%d/%m/%Y")).strip()
 
         link = str(response.url).strip()
+         
+        currentdate = time.strftime("%d-%m-%Y")
 
-        f = open(brandname+".csv", "a+")
+        currentdir = os.getcwd()
+
+        filename = brandname+".csv"
+
+        fdir =  currentdir + "/item_details_csv/" + currentdate
+
+        if not os.path.exists(fdir):
+            subprocess.check_output(['mkdir', '-p', fdir])
+
+        filename = fdir + "/" + brandname + ".csv"
+
+        f = open(filename,"a+")
+
+        
         print >>f, ','.join([date, item_title, item_price, item_image, item_clour, item_discount, item_seller, link])
         f.close()    

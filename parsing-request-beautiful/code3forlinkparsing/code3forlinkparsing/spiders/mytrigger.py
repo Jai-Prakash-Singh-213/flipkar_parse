@@ -23,7 +23,7 @@ class mytrigger(object):
 
         output  = subprocess.check_output(["python", filepath, cat,  file_bn_bl])
         print self.output, cat
-        
+       
 
     
 

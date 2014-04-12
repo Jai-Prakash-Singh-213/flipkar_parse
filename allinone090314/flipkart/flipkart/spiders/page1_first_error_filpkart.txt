@@ -1,0 +1,8 @@
+['electronics', 'http://www.flipkart.com/cameras/accessories?otracker=hp_nmenu_sub_electronics_0_Camera%20Accessories', 'Camera Accessories']
+['baby-kids', 'http://www.flipkart.com/toys/characters-l?otracker=hp_nmenu_sub_baby-kids_1_Popular%20Characters', 'Popular Characters']
+['electronics', 'http://www.flipkart.com/health-and-beauty/personal-care-appliances?otracker=hp_nmenu_sub_electronics_0_Personal%20Appliances', 'Personal Appliances']
+['electronics', 'http://www.flipkart.com#', 'Computers Category']
+['electronics', 'http://www.flipkart.com/camera-accessories/digital-photo-frames/pr?sid=jek,6l2,3mw&otracker=hp_nmenu_sub_electronics_0_Digital%20Photo%20Frames', 'Digital Photo Frames']
+['more-stores', 'http://www.flipkart.com/sports-fitness/other-sports?otracker=hp_nmenu_sub_more-stores_0_Other%20Sports', 'Other Sports']
+['more-stores', 'http://www.flipkart.com/sports-fitness/outdoor-adventure/motorsports/pr?sid=dep,nlv,2hj&otracker=hp_nmenu_sub_more-stores_0_Motorsports', 'Motorsports']
+['baby-kids', 'http://www.flipkart.com/footwear/kids-footwear/for-girls/pr?sid=osp%2Cmba%2Cerx&otracker=hp_nmenu_sub_baby-kids_1_Girls%20Footwear', 'Girls Footwear']
